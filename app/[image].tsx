@@ -4,6 +4,7 @@ import { Text } from "@/components/Themed";
 import { useLocalSearchParams, useNavigation } from "expo-router";
 import { useEffect, useState } from "react";
 import fetchAddress from "@/utils/networkUtils/fetch/fetchAddress";
+import handleAllErrors from "@/utils/networkUtils/errorUtils/handleAllErrors";
 
 const { height, width } = Dimensions.get("screen");
 export default function ImageScreen() {
@@ -35,8 +36,7 @@ export default function ImageScreen() {
         }}
         resizeMode="contain"
         source={{ uri: params?.uri as string }}
-        onError={(error) => console.log(error.nativeEvent.error)} // Manejar errores de carga
-        onLoad={() => console.log("Imagen cargada con éxito")}
+        onError={(error) => handleAllErrors(error.nativeEvent.error)} // Manejar errores de carga
       />
       <Text style={styles.adress}>{adress}</Text>
     </ScrollView>

@@ -5,7 +5,7 @@ import { useLocalSearchParams, useNavigation } from "expo-router";
 import { useEffect, useState } from "react";
 import fetchAddress from "@/utils/networkUtils/fetch/fetchAddress";
 
-const { height } = Dimensions.get("screen");
+const { height, width } = Dimensions.get("screen");
 export default function ImageScreen() {
   const params = useLocalSearchParams();
   const navigation = useNavigation();
@@ -29,12 +29,14 @@ export default function ImageScreen() {
     >
       <Image
         style={{
-          width: "100%",
+          width: width * 0.9,
           height: Number(params?.height) / 10 ?? "100%",
           marginBottom: 24,
         }}
         resizeMode="contain"
         source={{ uri: params?.uri as string }}
+        onError={(error) => console.log(error.nativeEvent.error)} // Manejar errores de carga
+        onLoad={() => console.log("Imagen cargada con éxito")}
       />
       <Text style={styles.adress}>{adress}</Text>
     </ScrollView>

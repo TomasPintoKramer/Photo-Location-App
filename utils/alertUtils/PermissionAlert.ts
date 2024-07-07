@@ -9,7 +9,7 @@ const PermissionAlert = (permissionOf: "camera access" | "location") =>
         text: "Cancel",
         style: "cancel",
       },
-      { text: "Settings", onPress: () => Linking.openSettings() },
+      { text: "Settings", onPress: async() => await Linking.openSettings() },
     ]
   );
 export default PermissionAlert;

@@ -1,5 +1,5 @@
-import { PressableProps, ViewStyle } from "react-native";
-import React from "react";
+import { PressableProps, View, ViewStyle } from "react-native";
+import React, { forwardRef } from "react";
 import { Link } from "expo-router";
 import { LinkProps } from "expo-router/build/link/Link";
 import StyledPressable from "./StyledPressable";
@@ -13,12 +13,15 @@ type Props = {
 interface StyledPressableProps extends PressableProps {
   style?: ViewStyle;
 }
-export default function PressableLink(props: Props) {
+
+const PressableLink =  forwardRef((props: Props, ref: React.Ref<View>) =>{
   return (
     <Link asChild {...props.linkProps}>
-      <StyledPressable {...props?.pressableProps}>
+      <StyledPressable {...props?.pressableProps} ref={ref}>
         {props.children}
       </StyledPressable>
     </Link>
   );
-}
+})
+
+export default PressableLink;

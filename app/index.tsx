@@ -1,6 +1,13 @@
 import { Text, View } from "@/components/Themed";
 import React, { useEffect, useState } from "react";
-import { FlatList, Image, StyleSheet, Dimensions, Alert, Linking } from "react-native";
+import {
+  FlatList,
+  Image,
+  StyleSheet,
+  Dimensions,
+  Alert,
+  Linking,
+} from "react-native";
 import * as Location from "expo-location";
 import StyledPressable from "@/components/StyledPressable";
 import PressableLink from "@/components/PressableLink";
@@ -8,8 +15,9 @@ import openCamera from "@/utils/camaraUtils/openCamara";
 import PermissionAlert from "@/utils/alertUtils/PermissionAlert";
 
 const numColumns = 3;
+const padding = 8;
 const { width, height } = Dimensions.get("screen");
-const size = width / numColumns;
+const size = (width - padding * 2) / numColumns;
 
 type ImageType = {
   location?: {
@@ -35,7 +43,7 @@ const GalleryScreen = () => {
     (async () => {
       const { status } = await Location.requestForegroundPermissionsAsync();
       if (status !== "granted") {
-       PermissionAlert("location")
+        PermissionAlert("location");
         return;
       }
     })();
@@ -82,7 +90,7 @@ const GalleryScreen = () => {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 8,
+    padding,
     height,
     width,
   },

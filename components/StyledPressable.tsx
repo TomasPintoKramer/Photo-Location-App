@@ -1,17 +1,19 @@
-import { Pressable, PressableProps, ViewStyle } from "react-native";
-import React from "react";
+import { Pressable, PressableProps, View, ViewStyle } from "react-native";
+import React, { forwardRef } from "react";
 
 interface StyledPressableProps extends PressableProps {
   style?: ViewStyle;
 }
-
-export default function StyledPressable(props: StyledPressableProps) {
+const StyledPressable = forwardRef((props: StyledPressableProps, ref: React.Ref<View>) => {
   return (
     <Pressable
       {...props}
+      ref={ref}
       style={({ pressed }) => [props?.style, pressed && { opacity: 0.5 }]}
     >
       {props.children}
     </Pressable>
   );
-}
+});
+
+export default StyledPressable;
